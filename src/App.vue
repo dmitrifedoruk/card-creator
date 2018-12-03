@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="./assets/picard3-mod02color.png">
+    <HelloWorld msg="Tea. Early Grey. Hot."/>
   </div>
 </template>
 
@@ -18,11 +18,10 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @import url('https://fonts.googleapis.com/css?family=K2D');
+  font-family: 'K2D', Helvetica, Arial, sans-serif;
   text-align: center;
-  color: #2c3e50;
+  color: royalblue;
   margin-top: 60px;
 }
 </style>
