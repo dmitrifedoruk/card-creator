@@ -1,0 +1,125 @@
+.card {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    height: 26rem;
+    background-color: blueviolet;
+    border-radius: 2%;
+    box-shadow: rgba(0, 0, 0, 0.5) .5em .5em .1em;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: max-content max-content;
+    grid-row-gap: 0;
+    position: relative;
+}
+
+.card > .art {
+    height: 99%;
+    margin: 0;
+    padding: 0;
+}
+
+.art > img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+}
+
+.card.data > .art, .collectionDesc .data {
+    background-color: hsl(248.35, 53.49%, 45%);
+}
+
+.card.data > .art > img, .collectionDesc .data {
+    filter: hue-rotate(0deg);
+}
+
+.card.picard > .art, .collectionDesc .picard {
+    background-color: hsl(248.35, 53.49%, 45%); /*lighter slateblue*/;
+}
+
+.card.picard > .art > img, .collectionDesc .picard {
+    filter: hue-rotate(0deg);
+}
+
+.card.worf > .art {
+    background-color: firebrick;
+    height: 98%;
+}
+
+.collectionDesc .worf {
+    background-color: firebrick;
+}
+
+.card.worf > .art > img, .collectionDesc .worf {
+    filter: hue-rotate(20deg) brightness(120%);
+}
+
+.card.drCrusher > .art {
+    background-color: steelblue;
+    height: 98%;
+}
+
+.collectionDesc .drCrusher {
+    background-color: steelblue;
+}
+
+.card.drCrusher > .art > img, .collectionDesc .drCrusher {
+    filter: hue-rotate(10deg) brightness(100%);
+}
+
+.card.laForge > .art{
+    background-color: firebrick;
+    height: 99%;
+}
+
+.card.laForge > .art > img {
+    filter: hue-rotate(130deg) saturate(120%);
+}
+
+.collectionDesc .laForge {
+    background-color: hsl(223, 57%, 37%);
+}
+
+.collectionDesc .laForge {
+    filter: hue-rotate(130deg) saturate(120%);
+}
+
+.description {
+    font-family: K2D, sans-serif;
+    color: darkcyan;
+    padding: 0 .2rem 0 .5rem;
+    font-size: 90%;
+    display: grid;
+    grid-template-rows: max-content max-content max-content;
+    grid-row-gap: 10px;
+}
+
+.description > h4 {
+    grid-row: 1 / 2;
+    font-size: 1.2em;
+    height: 2rem;
+    padding-top: 5px;
+    margin: 0;
+}
+
+.description > .quote {
+    grid-row: 2 / 3;
+    height: 2rem;
+    padding-top: 1px;
+    margin: 0 0 30px 0;
+}
+
+.description > .stats {
+    grid-row: 3 / 4;
+    height: 2rem;
+    padding-top: 10px;
+    margin: 0 0 5px 0;
+}
+
+.cardContainer {
+    object-fit: contain;
+    display: grid;
+    grid-template-columns: 1fr;
+}
