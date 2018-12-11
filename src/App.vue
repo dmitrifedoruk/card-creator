@@ -4,49 +4,8 @@
 
         <!--Form containing at least-->
         <!--id, name, font awesome symbol, image, descriptive text, and color-->
-        <template v-if="toggle">
-            <div id="cardCreateWrapper">
 
-                <button class="toggle" @click.prevent="toggleDisplay">toggle creator/inventory</button>
-
-
-                <fieldset id="cardOptions">
-                    <legend>Card Creation Options</legend>
-
-                    <label>ID&nbsp;<input id="cardID" v-model="id"/></label>
-                    <label>Name&nbsp;<input id="cardName" v-model="name"/></label>
-                    <label>Icon&nbsp;<input id="cardIcon" v-model="icon"/></label>
-                    <label>Image&nbsp;<input id="cardImage" v-model="image"/></label>
-                    <label>Description&nbsp;<textarea id="cardDesc" v-model="desc"/></label>
-                    <label>Color&nbsp;<input id="cardColor" type="color" v-model="color"/></label>
-                    <button id="saveButton">Save</button>
-
-                </fieldset>
-
-                <div id="cardPreview">
-                    <div class="cardContainer card" :style="{backgroundColor: color}">
-
-                        <div class="art">
-                            <img :src="image">
-                        </div>
-                        <div class="description">
-                            <h4 class="nameDesc"><i class="fas fa-user"></i>&nbsp;{{name}}</h4>
-                            <p class="stats"><i :class="icon"></i>&nbsp;{{desc}}</p>
-                            <p class="idCard"><i class="far fa-id-card"></i>&nbsp;{{id}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <template v-else>
-
-            <div id="cardInventoryDisplay">
-                <button class="toggle" @click.prevent="toggleDisplay">toggle creator/inventory</button>
-
-
-            </div>
-        </template>
+        <card-creator :cards="savedCards" @click="createCard"></card-creator>
 
     </div>
 
@@ -55,35 +14,25 @@
 <script>
 
 
+    import CardCreator from "./components/CardCreator";
     export default {
         name: 'app',
         data: function () {
             return {
-                id: '#',
-                name: 'Data',
-                icon: 'fas fa-save',
-                image: 'http://old.trekipedia.com/images/library/people/data-tng-165.jpg',
-                desc: 'cool android',
-                color: 'purple',
+                savedCards: [],
                 toggle: true,
-                savedCards: []
             }
         },
-        components: {},
+
+        components: {CardCreator},
+
         methods: {
-            toggleDisplay: function () {
-                if (this.toggle === false) {
-                    this.toggle = true;
-                }
-                else {
-                    this.toggle = false;
-                }
-            },
-
-            saveCard: function () {
-
+            createCard: function (event) {
+                this.savedCards.push({id:event.id,name:event.name,icon:event.icon,image:event.image,
+                    desc:event.desc,color:event.color});
             }
         }
+
     }
 </script>
 
@@ -103,89 +52,167 @@
 
     #cardCreateWrapper {
         display: grid;
-        grid-template-rows: 20px 210px 1fr;
+        grid-template-rows: 30px max-content 1fr;
         justify-items: center;
-        row-gap: 20px;
+        row-gap: 10px;
     }
 
     .toggle {
         grid-row: 1 / 2;
+        align-self: normal;
+        justify-self: center;
+        background-color: slateblue;
+        color: firebrick;
+        border-radius: 4%;
+        border: inset;
+        font-family: 'K2D', sans-serif;
+        height: 25px;
+        width: 250px;
+        font-weigh: 500;
+        align-content: center;
     }
 
     #cardOptions {
         grid-row: 2 / 3;
         display: grid;
         grid-template-rows: 20px 20px 20px 20px 1fr 20px;
+        grid-template-columns: 80px 1fr;
         justify-items: end;
         align-items: self-start;
         row-gap: 5px;
+        column-gap: 10px;
         border-radius: 5%;
+        border: inset;
     }
 
     #cardOptions input, textarea {
         color: firebrick;
-        background-color: aquamarine;
+        background-color: #57af92;
+        font-family: 'K2D', sans-serif;
     }
 
     #cardPreview {
         grid-row: 3 / 4;
     }
 
+    #cardInventoryWrapper {
+        display: grid;
+        grid-template-rows: 35px 1fr;
+        grid-template-columns: repeat(auto-fit,auto);
+    }
+
+    /*explicitly centers when screen width is down to one column of cards*/
+    @media (max-width: 480px) {
+        #cardInventoryWrapper {
+            justify-items: center;
+        }
+    }
+
+    #cardInventoryDisplay {
+        grid-row: 2 / 3;
+        padding: 10px 20px 0 20px;
+        display: grid;
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 15rem));
+    }
+
+    #idLabel {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+    }
+
     #cardID {
         grid-row: 1 / 2;
+        grid-column: 2 / 3;
         width: 185px;
+    }
+
+    #nameLabel {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
     }
 
     #cardName {
         grid-row: 2 / 3;
+        grid-column: 2 / 3;
         width: 185px;
+    }
+
+    #iconLabel {
+        grid-row: 3 / 4;
+        grid-column: 1 / 2;
     }
 
     #cardIcon {
         grid-row: 3 / 4;
+        grid-column: 2 / 3;
         width: 185px;
+    }
+
+    #imageLabel {
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
     }
 
     #cardImage {
         grid-row: 4 / 5;
+        grid-column: 2 / 3;
         width: 185px;
+    }
+
+    #descLabel {
+        grid-row: 5 / 6;
+        grid-column: 1 / 2;
     }
 
     #cardDesc {
         grid-row: 5 / 6;
+        grid-column: 2 / 3;
         width: 185px;
         height: 20px;
     }
 
+    #colorLabel {
+        grid-row: 6 / 7;
+        grid-column: 1 / 2;
+    }
+
     #cardColor {
         grid-row: 6 / 7;
+        grid-column: 2 / 3;
+        justify-self: start;
     }
 
     #saveButton {
         grid-row: 7 / 8;
+        grid-column: 2 / 3;
+        background-color: slateblue;
+        color: firebrick;
+        border-radius: 4%;
+        border: inset;
+        font-family: 'K2D', sans-serif;
+        height: 25px;
     }
 
     .cardContainer {
         object-fit: contain;
         display: grid;
         grid-template-columns: 1fr;
+        grid-template-rows: max-content max-content;
+        grid-row-gap: 0;
         justify-self: center;
-    }
-
-    .card {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
+        border: 5px inset;
         width: 15rem;
         height: 23rem;
         background-color: blueviolet;
         border-radius: 2%;
         box-shadow: rgba(0, 0, 0, 0.5) .5em .5em .1em;
         overflow: hidden;
-        display: grid;
-        grid-template-rows: max-content max-content;
-        grid-row-gap: 0;
         position: relative;
     }
+
+
 
     .art > img {
         width: 100%;
