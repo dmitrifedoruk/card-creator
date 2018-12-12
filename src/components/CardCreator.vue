@@ -31,32 +31,34 @@
 
         <div id="cardInventoryDisplay">
 
-            <cardContainer
-                    v-for="card in cards"
+            <InventoryItem
+                    v-for="(card,index) in cards"
                     :key="card.createDate"
                     :color="card.color"
                     :desc="card.desc"
                     :icon="card.icon"
                     :id="card.id"
                     :image="card.image"
-                    :name="card.name"/>
+                    :name="card.name"
+                    :create-date="card.createDate"
+                    :index="index"
+                    @remove="remove"/>
 
         </div>
-
-
 
         </div>
     </template>
+
     </div>
 </template>
 
 <script>
     import CardPreview from "./CardPreview";
-    import CardContainer from "./CardContainer";
+    import InventoryItem from "./InventoryItem";
 
     export default {
         name: "cardCreator",
-        components: {CardPreview,CardContainer},
+        components: {CardPreview,InventoryItem},
         data: function () {
             return {
                 id: '#',
@@ -69,7 +71,7 @@
             }
         },
         props: {
-          cards: []
+          cards: {}
         },
         methods: {
             toggleDisplay: function () {
@@ -77,9 +79,13 @@
             },
 
             save: function () {
-                const createDate = Date.now();
+                const cardDate = new Date();
+                const createDate = cardDate.toLocaleString();
                 this.$emit('click', {id:this.id,name:this.name,icon:this.icon,image:this.image,
-                desc:this.desc,color:this.color,createDate});
+                desc:this.desc,color:this.color,createDate,index:this.index});
+            },
+            remove: function(){
+                this.$emit('remove', {index:this.index});
             }
         }
     }

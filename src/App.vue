@@ -2,10 +2,7 @@
     <div id="app">
 
 
-        <!--Form containing at least-->
-        <!--id, name, font awesome symbol, image, descriptive text, and color-->
-
-        <card-creator :cards="savedCards" @click="createCard"></card-creator>
+        <card-creator :cards="savedCards" @click="createCard" @remove="removeFromInventory"></card-creator>
 
     </div>
 
@@ -29,7 +26,10 @@
         methods: {
             createCard: function (event) {
                 this.savedCards.push({id:event.id,name:event.name,icon:event.icon,image:event.image,
-                    desc:event.desc,color:event.color});
+                    desc:event.desc,color:event.color,createDate:event.createDate,index:event.index});
+            },
+            removeFromInventory: function(event){
+                this.savedCards.splice(event.index, 1);
             }
         }
 
@@ -68,7 +68,7 @@
         font-family: 'K2D', sans-serif;
         height: 25px;
         width: 250px;
-        font-weigh: 500;
+        font-weight: 500;
         align-content: center;
     }
 
@@ -251,5 +251,23 @@
         margin: 0;
     }
 
+    .dateDisplay {
+        margin: 5px 0 5px 0;
+    }
+
+    .deleteButton {
+        align-self: normal;
+        justify-self: center;
+        background-color: slateblue;
+        color: firebrick;
+        border-radius: 4%;
+        border: inset;
+        font-family: 'K2D', sans-serif;
+        height: 25px;
+        width: 250px;
+        font-weight: 500;
+        align-content: center;
+        margin-bottom: 10px;
+    }
 
 </style>
