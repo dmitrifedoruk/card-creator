@@ -26,7 +26,8 @@
         methods: {
             createCard: function (event) {
                 this.savedCards.push({id:event.id,name:event.name,icon:event.icon,image:event.image,
-                    desc:event.desc,color:event.color,createDate:event.createDate,index:event.index});
+                    desc:event.desc,color1:event.color1,color2:event.color2,color3:event.color3,
+                    createDate:event.createDate,index:event.index});
             },
             removeFromInventory: function(event){
                 this.savedCards.splice(event.index, 1);
@@ -236,7 +237,6 @@
 
     .description {
         font-family: K2D, sans-serif;
-        color: darkcyan;
         padding: 0 .2rem 0 .5rem;
         font-size: 90%;
         display: grid;

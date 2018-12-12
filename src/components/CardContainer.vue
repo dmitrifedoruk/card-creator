@@ -1,6 +1,9 @@
 <template>
 
-    <div class="cardContainer" :style="{backgroundColor: color}">
+    <div class="cardContainer"
+         :style="{backgroundColor: color1,
+         color: color2,
+         borderColor: color3}">
 
         <div class="art">
             <img :src="image">
@@ -16,7 +19,9 @@
     export default {
         name: 'cardContainer',
         props: {
-            color: {},
+            color1: {},
+            color2: {},
+            color3: {},
             desc: {},
             icon: {},
             id: {},

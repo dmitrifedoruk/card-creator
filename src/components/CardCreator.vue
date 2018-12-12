@@ -15,12 +15,25 @@
                 <label id="iconLabel">Icon</label><input id="cardIcon" v-model="icon"/>
                 <label id="imageLabel">ImageURL</label><input id="cardImage" type="url" v-model="image" required/>
                 <label id="descLabel">Description</label><textarea id="cardDesc" v-model="desc"/>
-                <label id="colorLabel">Color</label><input id="cardColor" type="color" value="red" v-model="color"/>
+                <label id="colorLabel">Color</label>
+                <span id="cardColor">
+                <input id="cardColor1" type="color" value="red" v-model="color1"/>
+                <input id="cardColor2" type="color" value="red" v-model="color2"/>
+                    <input id="cardColor3" type="color" value="red" v-model="color3"/>
+                </span>
                 <button id="saveButton" @click.prevent="save">Save</button>
 
             </fieldset>
 
-            <cardPreview :color="color" :desc="desc" :icon="icon" :id="id" :image="image" :name="name"/>
+            <cardPreview
+                    :color1="color1"
+                    :color2="color2"
+                    :color3="color3"
+                    :desc="desc"
+                    :icon="icon"
+                    :id="id"
+                    :image="image"
+                    :name="name"/>
 
         </div>
     </template>
@@ -35,7 +48,9 @@
             <InventoryItem
                     v-for="(card,index) in cards"
                     :key="card.createDate"
-                    :color="card.color"
+                    :color1="card.color1"
+                    :color2="card.color2"
+                    :color3="card.color3"
                     :desc="card.desc"
                     :icon="card.icon"
                     :id="card.id"
@@ -67,7 +82,9 @@
                 icon: 'fas fa-save',
                 image: 'http://old.trekipedia.com/images/library/people/data-tng-165.jpg',
                 desc: 'cool android',
-                color: 'purple',
+                color1: 'purple',
+                color2: 'green',
+                color3: 'darkcyan',
                 toggle: true,
             }
         },
@@ -83,7 +100,7 @@
                 const cardDate = new Date();
                 const createDate = cardDate.toLocaleString();
                 this.$emit('click', {id:this.id,name:this.name,icon:this.icon,image:this.image,
-                desc:this.desc,color:this.color,createDate,index:this.index});
+                desc:this.desc,color1:this.color1,color2:this.color2,color3:this.color3,createDate,index:this.index});
             },
             remove: function(event){
                 this.$emit('remove', {index:event.index});

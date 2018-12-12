@@ -1,6 +1,14 @@
 <template>
     <div class="inventoryItem">
-        <cardContainer :color="color" :desc="desc" :icon="icon" :id="id" :image="image" :name="name"/>
+        <cardContainer
+                :color1="color1"
+                :color2="color2"
+                :color3="color3"
+                :desc="desc"
+                :icon="icon"
+                :id="id"
+                :image="image"
+                :name="name"/>
         <p class="dateDisplay">Created on<br/>{{createDate}}</p>
         <button class="deleteButton" @click="remove">Delete</button>
 
@@ -15,7 +23,9 @@
         name: "InventoryItem",
         components: {CardContainer},
         props: {
-            color: {},
+            color1: {},
+            color2: {},
+            color3: {},
             desc: {},
             icon: {},
             id: {},
