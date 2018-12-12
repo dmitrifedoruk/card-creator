@@ -1,5 +1,6 @@
 <template>
     <div>
+        <header>Card Creator.  Go!</header>
     <template v-if="toggle">
         <div id="cardCreateWrapper">
 
@@ -9,10 +10,10 @@
             <fieldset id="cardOptions">
                 <legend>Card Creation Options</legend>
 
-                <label id="idLabel">ID</label><input id="cardID" v-model="id"/>
-                <label id="nameLabel">Name</label><input id="cardName" v-model="name"/>
+                <label id="idLabel">ID</label><input id="cardID" v-model="id" required/>
+                <label id="nameLabel">Name</label><input id="cardName" v-model="name" required/>
                 <label id="iconLabel">Icon</label><input id="cardIcon" v-model="icon"/>
-                <label id="imageLabel">Image</label><input id="cardImage" v-model="image"/>
+                <label id="imageLabel">ImageURL</label><input id="cardImage" type="url" v-model="image" required/>
                 <label id="descLabel">Description</label><textarea id="cardDesc" v-model="desc"/>
                 <label id="colorLabel">Color</label><input id="cardColor" type="color" value="red" v-model="color"/>
                 <button id="saveButton" @click.prevent="save">Save</button>
@@ -84,8 +85,8 @@
                 this.$emit('click', {id:this.id,name:this.name,icon:this.icon,image:this.image,
                 desc:this.desc,color:this.color,createDate,index:this.index});
             },
-            remove: function(){
-                this.$emit('remove', {index:this.index});
+            remove: function(event){
+                this.$emit('remove', {index:event.index});
             }
         }
     }

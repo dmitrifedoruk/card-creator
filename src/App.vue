@@ -50,6 +50,16 @@
         background-color: cadetblue;
     }
 
+    header {
+        background-color: #4e8183;
+        width: 110vw;
+        font-size: 2rem;
+        text-align: start;
+        position: relative;
+        left: -8px;
+        margin-bottom: 10px;
+    }
+
     #cardCreateWrapper {
         display: grid;
         grid-template-rows: 30px max-content 1fr;
@@ -66,9 +76,10 @@
         border-radius: 4%;
         border: inset;
         font-family: 'K2D', sans-serif;
-        height: 25px;
+        height: 35px;
         width: 250px;
         font-weight: 500;
+        font-size: 1.2rem;
         align-content: center;
     }
 
