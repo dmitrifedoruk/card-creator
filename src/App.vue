@@ -12,6 +12,8 @@
 
 
     import CardCreator from "./components/CardCreator";
+    import db from '@/components/firebaseDB';
+
     export default {
         name: 'app',
         data: function () {
@@ -21,16 +23,31 @@
             }
         },
 
+        created: function(){
+            db.collection("cards").onSnapshot((querySnapshot) => {
+                    this.savedCards = [];
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        const card = doc.data();
+                        card.dBID = doc.id;
+                        this.savedCards.push(card);
+                    });
+                });
+
+        },
+
         components: {CardCreator},
 
         methods: {
-            createCard: function (event) {
-                this.savedCards.push({id:event.id,name:event.name,icon:event.icon,image:event.image,
+            createCard(event) {
+
+                db.collection("cards").add({id:event.id,name:event.name,icon:event.icon,image:event.image,
                     desc:event.desc,color1:event.color1,color2:event.color2,color3:event.color3,
-                    createDate:event.createDate,index:event.index});
+                    createDate:event.createDate});
+
             },
             removeFromInventory: function(event){
-                this.savedCards.splice(event.index, 1);
+                db.collection("cards").doc(event.dBID).delete()
             }
         }
 

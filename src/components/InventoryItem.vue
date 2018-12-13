@@ -32,11 +32,10 @@
             image: {},
             name: {},
             createDate: {},
-            index: {}
         },
         methods: {
-            remove: function(){
-                this.$emit('remove', {index:this.index});
+            remove: function(event){
+                this.$emit('remove',event.dBID);
             }
         }
     }

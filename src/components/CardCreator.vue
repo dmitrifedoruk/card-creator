@@ -57,7 +57,6 @@
                     :image="card.image"
                     :name="card.name"
                     :create-date="card.createDate"
-                    :index="index"
                     @remove="remove"/>
 
         </div>
@@ -97,13 +96,13 @@
             },
 
             save: function () {
-                const cardDate = new Date();
-                const createDate = cardDate.toLocaleString();
+                const cardDate = new Date(); //current date obj
+                const createDate = cardDate.toLocaleString(); //formatted for display
                 this.$emit('click', {id:this.id,name:this.name,icon:this.icon,image:this.image,
-                desc:this.desc,color1:this.color1,color2:this.color2,color3:this.color3,createDate,index:this.index});
+                desc:this.desc,color1:this.color1,color2:this.color2,color3:this.color3,createDate});
             },
-            remove: function(event){
-                this.$emit('remove', {index:event.index});
+            remove: function(){
+                this.$emit('remove');
             }
         }
     }
