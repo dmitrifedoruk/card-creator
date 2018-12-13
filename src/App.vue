@@ -20,6 +20,7 @@
             return {
                 savedCards: [],
                 toggle: true,
+                message: ''
             }
         },
 
@@ -29,7 +30,7 @@
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
                         const card = doc.data();
-                        card.dBID = doc.id;
+                        card.dbid = doc.id;
                         this.savedCards.push(card);
                     });
                 });
@@ -47,7 +48,7 @@
 
             },
             removeFromInventory: function(event){
-                db.collection("cards").doc(event.dBID).delete()
+                db.collection("cards").doc(event.dbid).delete();
             }
         }
 
@@ -257,9 +258,10 @@
         padding: 0 .2rem 0 .5rem;
         font-size: 90%;
         display: grid;
-        grid-template-rows: max-content max-content 50px;
-        grid-row-gap: 10px;
+        grid-template-rows: max-content 60px 1fr;
+        grid-row-gap: 7px;
         justify-items: start;
+
     }
 
     .nameDesc {
@@ -270,6 +272,8 @@
     .stats {
         grid-row: 2 / 3;
         margin: 0;
+        justify-self: start;
+        text-align: left;
     }
 
     .idCard {

@@ -46,7 +46,7 @@
         <div id="cardInventoryDisplay">
 
             <InventoryItem
-                    v-for="(card,index) in cards"
+                    v-for="card in cards"
                     :key="card.createDate"
                     :color1="card.color1"
                     :color2="card.color2"
@@ -57,6 +57,7 @@
                     :image="card.image"
                     :name="card.name"
                     :create-date="card.createDate"
+                    :dbid="card.dbid"
                     @remove="remove"/>
 
         </div>
@@ -101,8 +102,8 @@
                 this.$emit('click', {id:this.id,name:this.name,icon:this.icon,image:this.image,
                 desc:this.desc,color1:this.color1,color2:this.color2,color3:this.color3,createDate});
             },
-            remove: function(){
-                this.$emit('remove');
+            remove: function(event){
+                this.$emit('remove',{dbid:event.dbid});
             }
         }
     }
